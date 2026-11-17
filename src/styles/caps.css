@@ -1,0 +1,323 @@
+/* CAPABILITIES ------------------------------------------------------------ */
+
+.caps {
+  padding: 22vh var(--gutter) 10vh;
+  background: var(--bg);
+}
+.caps__head {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 24px;
+  row-gap: 26px;
+  margin-bottom: 14vh;
+}
+.caps__head .label {
+  grid-column: 1 / -1;
+}
+.caps__title {
+  grid-column: 1 / span 9;
+  font-size: clamp(40px, 6.2vw, 108px);
+}
+
+.cap {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 24px;
+  padding: 9vh 0 12vh;
+  border-top: 1px solid var(--line-2);
+}
+.cap__name {
+  font-size: clamp(64px, 10.5vw, 188px);
+  font-weight: 250;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  font-stretch: var(--stretch, 125%);
+  margin-left: -0.05em;
+}
+.cap__text {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.cap__text p {
+  font-size: 16px;
+  color: var(--fg-2);
+  max-width: 36ch;
+}
+.cap__metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  max-width: 440px;
+}
+.cap__metrics dt {
+  color: var(--fg-3);
+  margin-bottom: 6px;
+}
+.cap__metrics dd {
+  font-stretch: 112%;
+  font-weight: 300;
+  font-size: clamp(28px, 2.6vw, 40px);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.cap__viz {
+  position: relative;
+}
+.cap__viz canvas {
+  width: 100%;
+  height: 100%;
+}
+.cap__viz figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -30px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--fg-3);
+}
+
+/* Grid: text left, wide terrain right */
+.cap--grid .cap__text {
+  grid-column: 1 / span 4;
+  justify-content: space-between;
+}
+.cap--grid .cap__viz {
+  grid-column: 5 / -1;
+  aspect-ratio: 16 / 9.4;
+}
+.cap__hint {
+  color: var(--fg-2);
+}
+
+/* Flow: full-bleed field with the text set into its right edge */
+.cap--flow {
+  grid-template-rows: auto;
+}
+.cap--flow .cap__viz {
+  grid-column: 1 / span 8;
+  grid-row: 1;
+  height: min(76vh, 720px);
+  margin-left: calc(var(--gutter) * -1);
+  border-right: 1px solid var(--line);
+}
+.cap--flow .cap__viz figcaption {
+  left: var(--gutter);
+}
+.cap--flow .cap__text {
+  grid-column: 9 / -1;
+  grid-row: 1;
+  justify-content: flex-end;
+  padding-left: 8px;
+}
+
+/* Matter: square specimen left, text and a live table right */
+.cap--matter {
+  grid-template-rows: auto 1fr;
+  row-gap: 48px;
+}
+.cap--matter .cap__viz {
+  grid-column: 1 / span 5;
+  grid-row: 1 / span 2;
+  aspect-ratio: 1;
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 25%,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 25% 100%;
+  border: 1px solid var(--line);
+}
+.cap--matter .cap__viz canvas {
+  cursor: grab;
+  touch-action: pan-y;
+}
+.cap--matter .cap__viz canvas:active {
+  cursor: grabbing;
+}
+.cap--matter .cap__viz figcaption {
+  left: 12px;
+  bottom: 10px;
+}
+.cap--matter .cap__text {
+  grid-column: 7 / -1;
+  grid-row: 1;
+}
+.cap__table {
+  grid-column: 7 / -1;
+  grid-row: 2;
+  align-self: end;
+  width: 100%;
+  border-collapse: collapse;
+}
+.cap__table th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--fg-3);
+  padding: 0 0 8px;
+  border-bottom: 1px solid var(--line-2);
+}
+.cap__table td {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+.cap__table td:first-child {
+  color: var(--fg);
+}
+.cap__table tr.is-new td {
+  animation: rowin 1.2s var(--ease);
+}
+.cap__table td.is-good {
+  color: var(--cyan);
+}
+@keyframes rowin {
+  from {
+    background: rgba(79, 230, 255, 0.12);
+  }
+  to {
+    background: transparent;
+  }
+}
+
+/* Signal: wide band of traces on top, text in three columns below */
+.cap--signal {
+  row-gap: 56px;
+}
+.cap--signal .cap__viz {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  height: min(52vh, 520px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.cap--signal .cap__text {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 24px;
+  align-items: end;
+}
+.cap--signal .cap__name {
+  grid-column: 1 / span 6;
+}
+.cap--signal .cap__text p {
+  grid-column: 7 / span 3;
+}
+.cap--signal .cap__metrics {
+  grid-column: 10 / -1;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 1100px) {
+  .cap--grid .cap__text {
+    grid-column: 1 / -1;
+    margin-bottom: 40px;
+  }
+  .cap--grid .cap__viz {
+    grid-column: 1 / -1;
+  }
+  .cap--flow .cap__viz {
+    grid-column: 1 / -1;
+    margin: 0 calc(var(--gutter) * -1);
+    border-right: 0;
+    height: 60vh;
+  }
+  .cap--flow .cap__text {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 60px;
+    padding: 0;
+  }
+  .cap--matter .cap__viz {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+  }
+  .cap--matter .cap__text {
+    grid-column: 7 / -1;
+  }
+  .cap--matter .cap__table {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .cap--signal .cap__name {
+    grid-column: 1 / -1;
+  }
+  .cap--signal .cap__text p {
+    grid-column: 1 / span 6;
+  }
+  .cap--signal .cap__metrics {
+    grid-column: 8 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .caps {
+    padding-top: 16vh;
+  }
+  .caps__title {
+    grid-column: 1 / -1;
+  }
+  .cap {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding: 7vh 0 9vh;
+  }
+  .cap--grid .cap__viz {
+    aspect-ratio: 4 / 3.4;
+    margin: 0 calc(var(--gutter) * -1);
+  }
+  .cap--grid .cap__viz figcaption,
+  .cap--flow .cap__viz figcaption {
+    left: var(--gutter);
+    right: var(--gutter);
+  }
+  .cap--grid .cap__text {
+    margin-bottom: 0;
+  }
+  .cap--flow .cap__viz {
+    order: 2;
+    height: 52vh;
+  }
+  .cap--flow .cap__text {
+    order: 1;
+    margin-top: 0;
+  }
+  .cap--matter .cap__viz {
+    order: 2;
+    width: 100%;
+  }
+  .cap--matter .cap__text {
+    order: 1;
+  }
+  .cap--matter .cap__table {
+    order: 3;
+    font-size: 9px;
+  }
+  .cap__table th:nth-child(2),
+  .cap__table td:nth-child(2) {
+    display: none;
+  }
+  .cap--signal .cap__viz {
+    height: 46vh;
+    margin: 0 calc(var(--gutter) * -1);
+  }
+  .cap--signal .cap__text {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 26px;
+  }
+  .cap--signal .cap__metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cap__metrics {
+    max-width: none;
+  }
+}

@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>NEXUS — The future is computed</title>
+    <meta name="description" content="NEXUS builds the computational layer under cities, power grids and supply networks. Concept site." />
+    <meta name="theme-color" content="#060708" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  </head>
+  <body class="is-loading">
+    <a class="skip" href="#core">Skip to content</a>
+
+    <!-- Loader / intro aperture -->
+    <div class="loader" aria-hidden="true">
+      <div class="loader__shutter loader__shutter--top"></div>
+      <div class="loader__shutter loader__shutter--bottom"></div>
+      <div class="loader__inner">
+        <div class="loader__line"><span></span></div>
+        <div class="loader__meta mono">
+          <span class="loader__label">Calibrating lattice</span>
+          <span class="loader__value">000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Persistent WebGL stage + overlay for technical callouts -->
+    <canvas class="stage" aria-hidden="true"></canvas>
+    <div class="overlay" aria-hidden="true">
+      <svg class="overlay__svg"></svg>
+      <div class="overlay__labels overlay__labels--core"></div>
+      <div class="overlay__labels overlay__labels--arch"></div>
+    </div>
+
+    <!-- Part name under the pointer -->
+    <div class="part-tip" aria-hidden="true"><span class="part-tip__name mono"></span><span class="part-tip__spec"></span></div>
+
+    <!-- Hold-to-compute HUD that follows the pointer -->
+    <div class="hud" aria-hidden="true">
+      <svg viewBox="0 0 48 48" class="hud__ring"><circle cx="24" cy="24" r="20" pathLength="1" /></svg>
+      <span class="hud__label mono">Computing <b>0</b>%</span>
+    </div>
+
+    <header class="nav" data-nav>
+      <a class="nav__brand" href="#top" aria-label="NEXUS, back to top">
+        <svg class="nav__mark" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="13.5" />
+          <ellipse cx="16" cy="16" rx="13.5" ry="5" transform="rotate(-28 16 16)" />
+          <circle cx="16" cy="16" r="2.4" class="fill" />
+        </svg>
+        <span class="nav__word">NEXUS</span>
+      </a>
+      <nav class="nav__links" aria-label="Sections">
+        <a href="#core" data-link="core"><i>01</i>Core</a>
+        <a href="#intelligence" data-link="intelligence"><i>02</i>Intelligence</a>
+        <a href="#architecture" data-link="architecture"><i>03</i>Architecture</a>
+        <a href="#capabilities" data-link="capabilities"><i>04</i>Capabilities</a>
+        <a href="#live" data-link="live"><i>05</i>Live system</a>
+        <a href="#vision" data-link="vision"><i>06</i>Vision</a>
+      </nav>
+      <div class="nav__right">
+        <span class="nav__section mono" aria-hidden="true"><span class="nav__section-track"><span>Index</span></span></span>
+        <a class="nav__cta" href="#cta">Request briefing</a>
+        <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu">
+          <span class="nav__menu-label">Menu</span>
+          <span class="nav__menu-icon" aria-hidden="true"><i></i><i></i></span>
+        </button>
+      </div>
+      <div class="nav__progress" aria-hidden="true"><span></span></div>
+    </header>
+
+    <!-- Section index on the left edge -->
+    <div class="rail" aria-hidden="true">
+      <span class="rail__num"><span class="rail__num-track"></span></span>
+      <span class="rail__line"><i></i></span>
+      <span class="rail__name"></span>
+    </div>
+
+    <div class="menu" id="menu" hidden>
+      <nav class="menu__links" aria-label="Menu">
+        <a href="#core"><span class="mono">Core</span><b>The instrument</b></a>
+        <a href="#intelligence"><span class="mono">Intelligence</span><b>Adaptive pathways</b></a>
+        <a href="#architecture"><span class="mono">Architecture</span><b>Five layers</b></a>
+        <a href="#capabilities"><span class="mono">Capabilities</span><b>Grid, Flow, Matter, Signal</b></a>
+        <a href="#live"><span class="mono">Live system</span><b>Run it yourself</b></a>
+        <a href="#vision"><span class="mono">Vision</span><b>2040</b></a>
+      </nav>
+      <div class="menu__foot mono">
+        <span>Zürich · Singapore · Reykjavík</span>
+        <a href="#cta">Request briefing</a>
+      </div>
+    </div>
+
+    <main id="top">
+      <!-- HERO ------------------------------------------------------------ -->
+      <section class="hero" data-section="index" aria-labelledby="hero-title">
+        <div class="hero__meta mono">
+          <span data-intro="meta">NEXUS Computational Systems</span>
+          <span data-intro="meta">Zürich · Singapore · Reykjavík</span>
+        </div>
+
+        <div class="hero__status mono" aria-label="System status">
+          <div class="hero__status-row" data-intro="meta"><span>Core state</span><b class="is-live">Nominal</b></div>
+          <div class="hero__status-row" data-intro="meta"><span>Decision cycle</span><b data-cycle>0.41 ms</b></div>
+          <div class="hero__status-row" data-intro="meta"><span>UTC</span><b data-clock>00:00:00</b></div>
+        </div>
+
+        <h1 class="hero__title" id="hero-title">
+          <span class="sr-only">NEXUS. </span>
+          <span class="mask"><span data-intro="line">The future</span></span>
+          <span class="mask"><span data-intro="line">is not built.</span></span>
+          <span class="mask"><span data-intro="line">It is computed.</span></span>
+        </h1>
+
+        <div class="hero__lede">
+          <p data-intro="lede">
+            NEXUS builds the computational layer under cities, power grids and supply networks. Our systems watch the
+            physical world in real time, model what happens next and correct it before anyone has to guess.
+          </p>
+          <a class="link-arrow" href="#core" data-intro="lede"><span>Enter the core</span><svg viewBox="0 0 24 10" aria-hidden="true"><path d="M0 5h22M18 1l4 4-4 4" /></svg></a>
+        </div>
+
+        <div class="hero__controls">
+          <button class="hero__hold mono" type="button" data-hold>
+            <span class="hero__hold-key" aria-hidden="true" data-intro="meta"></span>
+            <span class="hero__hold-text" data-intro="meta">Press and hold to compute</span>
+          </button>
+          <button class="hero__inspect mono" type="button" data-inspect aria-pressed="false">
+            <span class="hero__inspect-icon" aria-hidden="true" data-intro="meta"><i></i><i></i><i></i></span>
+            <span class="hero__inspect-text" data-intro="meta">Inspect the core</span>
+          </button>
+          <p class="hero__result mono" aria-live="polite"></p>
+        </div>
+
+        <div class="hero__scroll mono" aria-hidden="true">
+          <span data-intro="meta">Scroll</span>
+          <span class="hero__scroll-track" data-intro="meta"><i></i></span>
+        </div>
+
+        <div class="hero__wordmark" aria-hidden="true">
+          <span>N</span><span>E</span><span>X</span><span>U</span><span>S</span>
+        </div>
+      </section>
+
+      <!-- THE CORE --------------------------------------------------------- -->
+      <section class="core" id="core" data-section="core" aria-labelledby="core-title">
+        <div class="core__pin">
+          <div class="core__head">
+            <p class="label mono">The Core</p>
+            <h2 class="core__title display" id="core-title" data-split>An orrery for reasoning.</h2>
+          </div>
+          <p class="core__body" data-fade>
+            Five gimballed context rings turn around a photonic lattice sealed in glass. Each ring carries one model of the
+            world: time, space, energy, risk and intent. When the system reasons, the rings realign. What you see moving is
+            the computation itself.
+          </p>
+          <dl class="specs mono" data-specs>
+            <div><dt>Lattice</dt><dd>4,096 photonic nodes</dd></div>
+            <div><dt>Sustained</dt><dd>1.2 zettaFLOP/s</dd></div>
+            <div><dt>Decision cycle</dt><dd>0.41 ms</dd></div>
+            <div><dt>Thermal</dt><dd>Passive, 31 °C at full load</dd></div>
+            <div><dt>Housing</dt><dd>Fused silica, machined aluminium</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- INTELLIGENCE ----------------------------------------------------- -->
+      <section class="intel" id="intelligence" data-section="intelligence" aria-labelledby="intel-title">
+        <div class="intel__pin">
+          <div class="intel__field" role="img" aria-label="A three-dimensional network in four shells. Signals travel from the outer sensing shell through two model shells to a decision core and back out. Pathways that carry more signals become stronger.">
+            <canvas class="intel__canvas"></canvas>
+            <div class="intel__labels" aria-hidden="true"></div>
+          </div>
+          <div class="intel__text">
+            <p class="label mono">Intelligence</p>
+            <h2 class="intel__title display" id="intel-title" data-split>It learns from what actually happens.</h2>
+            <ol class="intel__phases" aria-label="Stages">
+              <li class="is-active">
+                <button type="button" class="intel__phase" aria-current="step">
+                  <span class="intel__phase-name mono"><i>01</i>Sense</span>
+                  <span class="intel__phase-text">Fourteen million streams arrive at once: grid frequency, rail telemetry, weather radar, port manifests, satellite thermal.</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="intel__phase">
+                  <span class="intel__phase-name mono"><i>02</i>Model</span>
+                  <span class="intel__phase-text">Two inner shells fold every stream into one continuous model of the network, rebuilt every 0.41 milliseconds.</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="intel__phase">
+                  <span class="intel__phase-name mono"><i>03</i>Decide</span>
+                  <span class="intel__phase-text">The centre commits to an action and sends it back to the edge: a breaker, a signal, a berth, a valve.</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="intel__phase">
+                  <span class="intel__phase-name mono"><i>04</i>Adapt</span>
+                  <span class="intel__phase-text">Every outcome is measured. The pathways that produced it are reinforced or weakened, so tomorrow's system is shaped by today's results.</span>
+                </button>
+              </li>
+            </ol>
+          </div>
+          <div class="intel__readout mono" aria-live="off">
+            <div><span>Signals in flight</span><b data-intel="flight">0</b></div>
+            <div><span>Pathways reinforced</span><b data-intel="reinforced">0</b></div>
+            <div><span>Events injected</span><b data-intel="events">0</b></div>
+          </div>
+          <p class="intel__hint mono"><span class="intel__hint-mouse">Click the field to inject an event</span><span class="intel__hint-touch">Tap the field to inject an event</span></p>
+          <div class="intel__progress" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </section>
+
+      <!-- ARCHITECTURE ----------------------------------------------------- -->
+      <section class="arch" id="architecture" data-section="architecture" aria-labelledby="arch-title">
+        <div class="arch__pin">
+          <div class="arch__head">
+            <p class="label mono">Architecture</p>
+            <h2 class="arch__title display" id="arch-title" data-split>Five layers, from photons to intent.</h2>
+          </div>
+          <ol class="arch__index mono" aria-label="Layers">
+            <li><button type="button"><i>L1</i><span>Substrate</span></button></li>
+            <li><button type="button"><i>L2</i><span>Fabric</span></button></li>
+            <li><button type="button"><i>L3</i><span>Lattice</span></button></li>
+            <li><button type="button"><i>L4</i><span>Context</span></button></li>
+            <li><button type="button"><i>L5</i><span>Interface</span></button></li>
+          </ol>
+          <div class="arch__detail">
+            <article class="arch__layer" data-layer="0">
+              <h3 class="display">Substrate</h3>
+              <p>Photonic interconnect etched into a ceramic base. Signals move between regions as light, not current, so distance stops being a cost.</p>
+              <dl class="mono"><div><dt>Bandwidth</dt><dd>9.6 Pb/s</dd></div><div><dt>Loss</dt><dd>&lt; 0.02 dB/cm</dd></div></dl>
+            </article>
+            <article class="arch__layer" data-layer="1">
+              <h3 class="display">Fabric</h3>
+              <p>Distributed memory across nine regional halls. Every node holds a fragment of the world model and can rebuild a neighbour that fails.</p>
+              <dl class="mono"><div><dt>Regions</dt><dd>9</dd></div><div><dt>Recovery</dt><dd>140 ms</dd></div></dl>
+            </article>
+            <article class="arch__layer" data-layer="2">
+              <h3 class="display">Lattice</h3>
+              <p>The reasoning core. Four thousand photonic nodes compute the next state of the whole network in parallel, then hand it upward.</p>
+              <dl class="mono"><div><dt>Nodes</dt><dd>4,096</dd></div><div><dt>Cycle</dt><dd>0.41 ms</dd></div></dl>
+            </article>
+            <article class="arch__layer" data-layer="3">
+              <h3 class="display">Context</h3>
+              <p>Gimballed rings hold separate models of time, space and risk. How they align decides which model leads a decision.</p>
+              <dl class="mono"><div><dt>Planes</dt><dd>5</dd></div><div><dt>Realign</dt><dd>12 ms</dd></div></dl>
+            </article>
+            <article class="arch__layer" data-layer="4">
+              <h3 class="display">Interface</h3>
+              <p>Where people set intent and limits. NEXUS proposes, explains its reasoning and waits for a signature on anything that cannot be undone.</p>
+              <dl class="mono"><div><dt>Human sign-off</dt><dd>Required</dd></div><div><dt>Audit trail</dt><dd>Complete</dd></div></dl>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CAPABILITIES ----------------------------------------------------- -->
+      <section class="caps" id="capabilities" data-section="capabilities" aria-labelledby="caps-title">
+        <header class="caps__head">
+          <p class="label mono">Capabilities</p>
+          <h2 class="caps__title display" id="caps-title" data-split>Four systems running on one core.</h2>
+        </header>
+
+        <article class="cap cap--grid" aria-labelledby="cap-grid">
+          <div class="cap__text">
+            <h3 class="cap__name display" id="cap-grid" data-stretch>Grid</h3>
+            <p>Balances continental power networks second by second. Renewable surplus moves before it is wasted, and peaks are flattened before they trip a line.</p>
+            <dl class="cap__metrics">
+              <div><dt class="mono">Peak load</dt><dd data-count="-31" data-suffix="%">0%</dd></div>
+              <div><dt class="mono">Recovered per year</dt><dd data-count="2.4" data-decimals="1" data-suffix=" TWh">0 TWh</dd></div>
+            </dl>
+          </div>
+          <figure class="cap__viz">
+            <canvas data-viz="grid" role="img" aria-label="A terrain of electrical load across a network. Hovering flattens the peaks as the system balances the grid."></canvas>
+            <figcaption class="mono"><span data-grid-state>Unbalanced · peak 96%</span><span class="cap__hint">Hover to balance</span></figcaption>
+          </figure>
+        </article>
+
+        <article class="cap cap--flow" aria-labelledby="cap-flow">
+          <figure class="cap__viz">
+            <canvas data-viz="flow" role="img" aria-label="Freight streams flowing across a network toward three ports. Moving the pointer closes a corridor and the streams reroute around it."></canvas>
+            <figcaption class="mono"><span>Corridor closure follows your pointer</span></figcaption>
+          </figure>
+          <div class="cap__text">
+            <h3 class="cap__name display" id="cap-flow" data-stretch>Flow</h3>
+            <p>Routes freight across ports, rail and road as a single network. When a corridor closes, four million containers find another way within a minute.</p>
+            <dl class="cap__metrics">
+              <div><dt class="mono">Containers per day</dt><dd data-count="4.1" data-decimals="1" data-suffix=" M">0 M</dd></div>
+              <div><dt class="mono">To reroute</dt><dd data-count="58" data-suffix=" s">0 s</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="cap cap--matter" aria-labelledby="cap-matter">
+          <figure class="cap__viz">
+            <canvas data-viz="matter" role="img" aria-label="A rotating crystal lattice that morphs between candidate material structures. Drag to rotate."></canvas>
+            <figcaption class="mono"><span>Drag to rotate</span></figcaption>
+          </figure>
+          <div class="cap__text">
+            <h3 class="cap__name display" id="cap-matter" data-stretch>Matter</h3>
+            <p>Searches chemical space for materials that do not exist yet: battery cathodes, low-carbon cements, catalysts for clean fuel.</p>
+            <dl class="cap__metrics">
+              <div><dt class="mono">Screened per hour</dt><dd data-count="11400" data-suffix="">0</dd></div>
+              <div><dt class="mono">Synthesised in 2034</dt><dd data-count="37" data-suffix="">0</dd></div>
+            </dl>
+          </div>
+          <table class="cap__table mono" aria-label="Candidate materials in the current screening run">
+            <thead><tr><th scope="col">Candidate</th><th scope="col">Class</th><th scope="col">Stability</th><th scope="col">Status</th></tr></thead>
+            <tbody data-matter-table>
+              <tr><td>NX-4688</td><td>Layered cathode</td><td class="is-good">0.966</td><td>Queued for synthesis</td></tr>
+              <tr><td>NX-4602</td><td>Perovskite oxide</td><td class="is-good">0.972</td><td>Queued for synthesis</td></tr>
+              <tr><td>NX-4585</td><td>Olivine phosphate</td><td>0.926</td><td>Screened</td></tr>
+              <tr><td>NX-4516</td><td>Covalent framework</td><td>0.866</td><td>Screened</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article class="cap cap--signal" aria-labelledby="cap-signal">
+          <figure class="cap__viz">
+            <canvas data-viz="signal" role="img" aria-label="Eighteen sensor traces. One develops a faint precursor pattern, which is flagged and isolated before the fault spreads."></canvas>
+          </figure>
+          <div class="cap__text">
+            <h3 class="cap__name display" id="cap-signal" data-stretch>Signal</h3>
+            <p>Watches millions of sensors for the faint pattern that comes before a failure, and isolates the fault minutes before it can cascade.</p>
+            <dl class="cap__metrics">
+              <div><dt class="mono">Average early warning</dt><dd data-count="11" data-suffix=" min">0 min</dd></div>
+              <div><dt class="mono">False alarms</dt><dd data-count="0.3" data-decimals="1" data-suffix="%">0%</dd></div>
+            </dl>
+          </div>
+        </article>
+      </section>
+
+      <!-- LIVE SYSTEM ------------------------------------------------------ -->
+      <section class="live" id="live" data-section="live system" aria-labelledby="live-title">
+        <header class="live__head">
+          <div>
+            <p class="label mono">Live system</p>
+            <h2 class="live__title display" id="live-title" data-split>Run it yourself.</h2>
+          </div>
+          <p class="live__intro">
+            A working model in your browser. The world is simulated; the optimisation is real and runs on your machine.
+            Change the network and watch the system respond.
+          </p>
+        </header>
+
+        <div class="console" data-console>
+          <div class="console__side">
+            <div class="console__modes" role="tablist" aria-label="Scenario">
+              <button role="tab" aria-selected="true" data-mode="route"><span class="mono">Route</span><b>Freight routing</b></button>
+              <button role="tab" aria-selected="false" data-mode="balance"><span class="mono">Balance</span><b>Power grid</b></button>
+              <button role="tab" aria-selected="false" data-mode="place"><span class="mono">Place</span><b>Edge compute</b></button>
+            </div>
+            <p class="console__desc" data-desc></p>
+            <div class="console__controls">
+              <label class="slider">
+                <span class="slider__row mono"><span data-p1-label>Depots</span><output data-p1-out>60</output></span>
+                <input type="range" data-p1 min="12" max="200" value="60" />
+              </label>
+              <label class="slider">
+                <span class="slider__row mono"><span data-p2-label>Storm radius</span><output data-p2-out>0.16</output></span>
+                <input type="range" data-p2 min="0" max="100" value="45" />
+              </label>
+            </div>
+            <div class="console__actions">
+              <button class="btn btn--primary" data-act="run"><span>Pause</span></button>
+              <button class="btn" data-act="perturb"><span>Perturb</span></button>
+              <button class="btn" data-act="reset"><span>Reset</span></button>
+            </div>
+            <p class="console__how mono" data-how></p>
+          </div>
+
+          <div class="console__view">
+            <canvas class="console__canvas" data-live-canvas tabindex="0" role="img" aria-label="Simulation view"></canvas>
+            <div class="console__status mono"><span class="console__dot"></span><span data-status>Running</span></div>
+          </div>
+
+          <div class="console__telemetry mono" aria-live="off">
+            <div class="tele">
+              <span class="tele__k" data-obj-label>Route length</span>
+              <b class="tele__v" data-obj>—</b>
+            </div>
+            <div class="tele">
+              <span class="tele__k">Improvement</span>
+              <b class="tele__v" data-imp>—</b>
+            </div>
+            <div class="tele tele--half">
+              <span class="tele__k">Iterations</span>
+              <b class="tele__v" data-iter>0</b>
+            </div>
+            <div class="tele tele--half">
+              <span class="tele__k">Compute</span>
+              <b class="tele__v" data-ms>0 ms</b>
+            </div>
+            <div class="tele tele--chart">
+              <span class="tele__k">Convergence</span>
+              <canvas data-chart aria-hidden="true"></canvas>
+            </div>
+            <ol class="log" data-log aria-label="Event log"></ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISION ----------------------------------------------------------- -->
+      <section class="vision" id="vision" data-section="vision" aria-labelledby="vision-title">
+        <div class="vision__plate">
+          <div class="vision__top mono">
+            <span>Vision</span>
+            <span>Essay, 2035</span>
+          </div>
+          <h2 class="vision__title serif" id="vision-title" data-split>
+            Infrastructure that thinks will outlast infrastructure that is merely strong.
+          </h2>
+          <div class="vision__grid">
+            <figure class="vision__drawing" aria-hidden="true">
+              <svg viewBox="0 0 600 600" data-drawing></svg>
+              <figcaption class="mono">Core, plan and elevation. Scale 1:12</figcaption>
+            </figure>
+            <div class="vision__essay serif">
+              <p>For two centuries we built for the worst case. Thicker cables, wider roads, larger reserves. Strength was the only defence against uncertainty, and strength is expensive: most of what we have built sits idle, waiting for a day that rarely comes.</p>
+              <p>Computation changes that trade. A grid that sees a storm forming can move power out of its path. A port that knows tomorrow's arrivals can berth them without a queue. Capacity becomes a question of timing rather than size.</p>
+              <p>By 2040 we expect the most valuable infrastructure on Earth to be invisible: a layer of reasoning underneath the physical world, keeping it within limits we agree on together. We are building that layer slowly and in public, with a human signature on every decision that cannot be undone.</p>
+            </div>
+          </div>
+          <dl class="vision__facts">
+            <div><dt class="mono">Founded</dt><dd class="serif">2029</dd></div>
+            <div><dt class="mono">Cities connected</dt><dd class="serif">41</dd></div>
+            <div><dt class="mono">Irreversible actions without sign-off</dt><dd class="serif">0</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -------------------------------------------------------- -->
+      <section class="cta" id="cta" data-section="briefing" aria-labelledby="cta-title">
+        <div class="cta__inner">
+          <p class="label mono">Briefings</p>
+          <h2 class="cta__title display" id="cta-title">
+            <span class="mask"><span>Compute what</span></span>
+            <span class="mask"><span>comes next.</span></span>
+          </h2>
+          <p class="cta__sub">Private briefings for grid operators, port authorities and city governments. Four a month, in Zürich or on site.</p>
+          <form class="cta__form" data-form novalidate>
+            <label class="sr-only" for="cta-email">Work email</label>
+            <input id="cta-email" type="email" name="email" placeholder="Work email" autocomplete="email" required />
+            <button class="btn btn--primary" type="submit"><span>Request briefing</span></button>
+            <p class="cta__msg mono" data-form-msg aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" data-section="briefing">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <span class="footer__word">NEXUS</span>
+          <p>The future is not built. It is computed.</p>
+        </div>
+        <div class="footer__col mono">
+          <span class="footer__k">Offices</span>
+          <span>Zürich 47.3769 N, 8.5417 E</span>
+          <span>Singapore 1.2903 N, 103.8519 E</span>
+          <span>Reykjavík 64.1466 N, 21.9426 W</span>
+        </div>
+        <nav class="footer__col mono" aria-label="Footer">
+          <span class="footer__k">Index</span>
+          <a href="#core">Core</a>
+          <a href="#intelligence">Intelligence</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#capabilities">Capabilities</a>
+          <a href="#live">Live system</a>
+          <a href="#vision">Vision</a>
+        </nav>
+        <div class="footer__col mono">
+          <span class="footer__k">Status</span>
+          <span class="footer__status"><i></i>All systems nominal</span>
+          <span>Build 2035.11.17</span>
+          <span>Local <b data-local-clock>00:00</b></span>
+          <a href="#top" class="footer__top">Back to top</a>
+        </div>
+      </div>
+      <div class="footer__base mono">
+        <span>© 2035 NEXUS Computational Systems AG</span>
+        <span>Concept site. The company is fictional; the live system really computes.</span>
+        <a href="https://leodex.dev" target="_blank" rel="noopener">Design and code: LeoDex</a>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
